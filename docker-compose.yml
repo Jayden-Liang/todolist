@@ -1,0 +1,15 @@
+    version: '2.1'
+    services:
+      website:
+        build: .
+        command: >
+          gunicorn -b 0.0.0.0:2000
+            --access-logfile -
+            --reload
+            "todolist.app:create_app()"
+        environment:
+          PYTHONUNBUFFERED: 'true'
+        volumes:
+          - '.:/todolist'
+        ports:
+          - '2000:2000'
